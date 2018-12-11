@@ -1,9 +1,8 @@
 #include "imports.h"
-#include "janela.h"
-#include "teclas.h"
 
 int main() {
 	buffer = initArrayListStrings();
+	cursor = criarCursor();
 	setupOneScreen();
 
 	while (1) {

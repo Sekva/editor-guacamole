@@ -34,17 +34,18 @@ void drawBuffer() {
 
 	for(int i = 0; i < buffer->tamanho; i++) {
 		String* linhaLida = buffer->strings[i];
-
 		if(linhaLida->array[0] == '\n') {
 			char* semBarraN = removeFisrtChar(linhaLida->array);
 			XDrawString(display, window, gContexto, 10, (i+1) * 10, semBarraN, linhaLida->tamanho-1);
 			free(semBarraN);
 		} else {
 			char* linha = linhaLida->array;
-			XDrawString(display, window, DefaultGC(display, screenN), 10, (i+1) * 10, linha, linhaLida->tamanho);
+			char* linhaCursor = malloc((sizeof(char)*linhaLida->tamanho)+1);
+			strcpy(linhaCursor, linha);
+			linhaCursor[linhaLida->tamanho] = cursor->estilo;
+			XDrawString(display, window, DefaultGC(display, screenN), 10, (i+1) * 10, linhaCursor, linhaLida->tamanho+1);
+			free(linhaCursor);
 		}
-
-
 	}
 }
 
